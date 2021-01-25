@@ -10,7 +10,6 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
         android:id="@+id/StatsAppBar"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -18,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/statsToolBar"
-            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 

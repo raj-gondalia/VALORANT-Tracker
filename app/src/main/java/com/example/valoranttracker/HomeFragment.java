@@ -13,10 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.button.MaterialButton;
+
 public class HomeFragment extends Fragment {
 
+    private static final String TAG = "HomeFragment";
+
     private EditText etUserName, etTag;
-    private Button btnSearch;
+    private MaterialButton btnSearch;
 
     @Nullable
     @Override

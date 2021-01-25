@@ -7,11 +7,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.valoranttracker.Adapters.SectionPageAdapter;
-import com.example.valoranttracker.playerInfoFragments.PlayerAgents;
-import com.example.valoranttracker.playerInfoFragments.PlayerCareer;
-import com.example.valoranttracker.playerInfoFragments.PlayerMaps;
-import com.example.valoranttracker.playerInfoFragments.PlayerOverview;
-import com.example.valoranttracker.playerInfoFragments.PlayerWeapons;
+import com.example.valoranttracker.playerInfoFragments.PlayerCareerFragment;
+import com.example.valoranttracker.playerInfoFragments.PlayerOverviewFragments;
+import com.example.valoranttracker.playerInfoFragments.PlayerRankFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class Stats extends AppCompatActivity {
@@ -35,11 +33,9 @@ public class Stats extends AppCompatActivity {
 
     private void setupViewPager() {
         mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
-        mSectionPageAdapter.addFragment(new PlayerOverview(), "Overview");
-        mSectionPageAdapter.addFragment(new PlayerCareer(), "Career");
-        mSectionPageAdapter.addFragment(new PlayerAgents(), "Agents");
-        mSectionPageAdapter.addFragment(new PlayerMaps(), "Maps");
-        mSectionPageAdapter.addFragment(new PlayerWeapons(), "Weapons");
+        mSectionPageAdapter.addFragment(new PlayerOverviewFragments(), "Overview");
+        mSectionPageAdapter.addFragment(new PlayerCareerFragment(), "Career");
+        mSectionPageAdapter.addFragment(new PlayerRankFragment(), "Rank");
         mViewPager.setAdapter(mSectionPageAdapter);
     }
 }

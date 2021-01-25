@@ -13,21 +13,21 @@ import androidx.fragment.app.Fragment;
 
 import com.example.valoranttracker.R;
 
-public class PlayerAgents extends Fragment {
+public class PlayerCareerFragment extends Fragment {
 
     private Button btn;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.player_agent_fragment, container, false);
+        View view = inflater.inflate(R.layout.player_career_fragment, container, false);
 
-        btn = view.findViewById(R.id.btnPlayerAgents);
+        btn = view.findViewById(R.id.btnPlayerCareer);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Player Agents btn clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Player Career btn clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
