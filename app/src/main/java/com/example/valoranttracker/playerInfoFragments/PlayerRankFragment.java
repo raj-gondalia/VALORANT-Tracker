@@ -20,7 +20,7 @@ public class PlayerRankFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.player_weapons_fragment, container, false);
+        View view = inflater.inflate(R.layout.player_rank_fragment, container, false);
 
         btn = view.findViewById(R.id.btnPlayerWeapons);
 
