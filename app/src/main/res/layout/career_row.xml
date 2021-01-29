@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:weightSum="100"
+    android:background="@color/colorLoss"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="15"
+        android:src="@drawable/ico_spikerush"
+        android:id="@+id/modeImageView"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:scaleType="fitXY"
+        android:src="@drawable/phoenix"
+        android:id="@+id/agentImageView"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="30"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:text="Victory"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#FFF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="35sp"
+            android:layout_gravity="center"
+            android:text="15 - 13"
+            android:textColor="#FFF"
+            android:id="@+id/roundsTextView"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_weight="35"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        android:src="@drawable/map_gradient"
+        android:background="@drawable/haven"
+        android:scaleType="fitXY"
+        android:id="@+id/mapImageView"/>
+
+
+
+
+
+
+</LinearLayout>

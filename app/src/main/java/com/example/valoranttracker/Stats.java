@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.valoranttracker.Adapters.SectionPageAdapter;
 import com.example.valoranttracker.playerInfoFragments.PlayerCareerFragment;
@@ -22,10 +27,21 @@ public class Stats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
+        Bundle bundle = getIntent().getExtras();
+
         mViewPager = findViewById(R.id.statsViewPager);
         setupViewPager();
 
         Toolbar toolbar = findViewById(R.id.statsToolBar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Stats.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        toolbar.setTitle(String.format("%s#%s", bundle.getString("username"), bundle.get("tag").toString()));
 
         TabLayout tabLayout = findViewById(R.id.statsTabLayout);
         tabLayout.setupWithViewPager(mViewPager);

@@ -3,13 +3,6 @@ package com.example.valoranttracker.models;
 public class OverviewModel {
     private String key;
     private String value;
-    private int image;
-
-    public OverviewModel(String key, String value, int image) {
-        this.key = key;
-        this.value = value;
-        this.image = image;
-    }
 
     public OverviewModel(String key, String value) {
         this.key = key;
@@ -34,13 +27,5 @@ public class OverviewModel {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
     }
 }

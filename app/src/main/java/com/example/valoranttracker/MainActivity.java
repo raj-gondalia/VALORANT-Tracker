@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setupWithViewPager(mViewPager);
 
         mToolbar = findViewById(R.id.toolBar);
-        mToolbar.setSubtitle("Valorant Stats");
+        mToolbar.setTitle("Valorant Tracker");
     }
 
     private void setupViewPager() {

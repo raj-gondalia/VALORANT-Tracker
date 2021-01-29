@@ -38,7 +38,6 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.ViewHo
     public void onBindViewHolder(@NonNull OverviewAdapter.ViewHolder holder, int position) {
         holder.valueText.setText(arrayList.get(position).getValue());
         holder.nameText.setText(arrayList.get(position).getKey());
-        holder.imageView.setImageResource(arrayList.get(position).getImage());
     }
 
     @Override
@@ -48,13 +47,11 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
         private TextView nameText, valueText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.imageViewRow);
             valueText = itemView.findViewById(R.id.valueTextView);
             nameText = itemView.findViewById(R.id.nameTextView);
         }

@@ -4,4 +4,6 @@
     <color name="colorPrimary">#d72323</color>
     <color name="colorAccent">#928a97</color>
     <color name="colorSurface">#3a4750</color>
+    <color name="colorWin">#96ff96</color>
+    <color name="colorLoss">#ff9696</color>
 </resources>

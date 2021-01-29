@@ -22,9 +22,9 @@ public class Stats {
     @Expose
     private int kills;
 
-    @SerializedName("deathes")
+    @SerializedName("deaths")
     @Expose
-    private int deathes;
+    private int deaths;
 
     @SerializedName("assists")
     @Expose
@@ -41,6 +41,30 @@ public class Stats {
     @SerializedName("headshotpercentage")
     @Expose
     private double headshotpercentage;
+
+    @SerializedName("wins")
+    @Expose
+    private int wins;
+
+    @SerializedName("winpercentage")
+    @Expose
+    private double winpercentage;
+
+    @SerializedName("firstbloods")
+    @Expose
+    private int firstbloods;
+
+    @SerializedName("aces")
+    @Expose
+    private int aces;
+
+    @SerializedName("clutches")
+    @Expose
+    private int clutches;
+
+    @SerializedName("flawless")
+    @Expose
+    private int flawless;
 
     public String getRank() {
         return rank;
@@ -66,12 +90,20 @@ public class Stats {
         this.matches = matches;
     }
 
-    public int getDeathes() {
-        return deathes;
+    public int getKills() {
+        return kills;
     }
 
-    public void setDeathes(int deathes) {
-        this.deathes = deathes;
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
     }
 
     public int getAssists() {
@@ -102,16 +134,56 @@ public class Stats {
         return headshotpercentage;
     }
 
-    public int getKills() {
-        return kills;
-    }
-
-    public void setKills(int kills) {
-        this.kills = kills;
-    }
-
     public void setHeadshotpercentage(double headshotpercentage) {
         this.headshotpercentage = headshotpercentage;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public double getWinpercentage() {
+        return winpercentage;
+    }
+
+    public void setWinpercentage(double winpercentage) {
+        this.winpercentage = winpercentage;
+    }
+
+    public int getFirstbloods() {
+        return firstbloods;
+    }
+
+    public void setFirstbloods(int firstbloods) {
+        this.firstbloods = firstbloods;
+    }
+
+    public int getAces() {
+        return aces;
+    }
+
+    public void setAces(int aces) {
+        this.aces = aces;
+    }
+
+    public int getClutches() {
+        return clutches;
+    }
+
+    public void setClutches(int clutches) {
+        this.clutches = clutches;
+    }
+
+    public int getFlawless() {
+        return flawless;
+    }
+
+    public void setFlawless(int flawless) {
+        this.flawless = flawless;
     }
 
     @Override
@@ -121,11 +193,17 @@ public class Stats {
                 ", playtime=" + playtime +
                 ", matches=" + matches +
                 ", kills=" + kills +
-                ", deathes=" + deathes +
+                ", deathes=" + deaths +
                 ", assists=" + assists +
                 ", kdratio=" + kdratio +
                 ", headshots=" + headshots +
                 ", headshotpercentage=" + headshotpercentage +
+                ", wins=" + wins +
+                ", winpercentage=" + winpercentage +
+                ", firstbloods=" + firstbloods +
+                ", aces=" + aces +
+                ", clutches=" + clutches +
+                ", flawless=" + flawless +
                 '}';
     }
 }

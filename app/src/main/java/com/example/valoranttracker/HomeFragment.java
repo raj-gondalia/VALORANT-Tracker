@@ -36,6 +36,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Stats.class);
+                intent.putExtra("username", etUserName.getText().toString().trim());
+                intent.putExtra("tag", etTag.getText().toString().trim());
                 startActivity(intent);
             }
         });

@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/statsToolBar"
+            app:navigationIcon="?attr/homeAsUpIndicator"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
