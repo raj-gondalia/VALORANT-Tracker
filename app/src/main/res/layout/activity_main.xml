@@ -18,12 +18,12 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:id="@+id/toolBar"/>
+            android:id="@+id/activityMainToolbar"/>
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"/>
+            android:id="@+id/activityMainTabLayout"/>
 
 
     </com.google.android.material.appbar.AppBarLayout>

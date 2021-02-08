@@ -1,4 +1,4 @@
-package com.example.valoranttracker.models;
+package com.example.valoranttracker.models.Profile;
 
 import com.example.valoranttracker.models.Playtime.Playtime;
 import com.google.gson.annotations.Expose;

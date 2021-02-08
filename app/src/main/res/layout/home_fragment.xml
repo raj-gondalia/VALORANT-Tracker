@@ -26,7 +26,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etUserName"
+                android:id="@+id/homeFragUserNameEditText"
                 android:background="#FFFFFF"
                 android:scrollIndicators="top"
                 android:inputType="text"
@@ -45,7 +45,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/etTag"
+                android:id="@+id/homeFragTagEditText"
                 android:background="#FFFFFF"
                 android:scrollIndicators="top"
                 android:inputType="numberDecimal"
@@ -59,7 +59,7 @@
             android:layout_gravity="center"
             android:layout_weight="20"
             android:background="@drawable/button_background"
-            android:id="@+id/btnSearch"
+            android:id="@+id/homeFragGoButton"
             android:text="Go"/>
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.example.valoranttracker.Adapters;
+package com.example.valoranttracker.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

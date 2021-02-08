@@ -1,4 +1,4 @@
-package com.example.valoranttracker;
+package com.example.valoranttracker.fragments.homeScreenFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class LeaderboardFragment extends Fragment {
+import com.example.valoranttracker.R;
+
+public class HistoryFragment extends Fragment {
 
     private Button btn;
 
@@ -19,13 +21,13 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.leaderboard_fragment, container, false);
+        View view = inflater.inflate(R.layout.history_fragment, container, false);
 
-        btn = view.findViewById(R.id.btnLeaderboard);
+        btn = view.findViewById(R.id.btnHistory);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Leaderboard Btn Pressed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "History Btn Pressed", Toast.LENGTH_SHORT).show();
             }
         });
 

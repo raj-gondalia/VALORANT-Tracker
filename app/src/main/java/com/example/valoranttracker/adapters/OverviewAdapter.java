@@ -1,10 +1,9 @@
-package com.example.valoranttracker.Adapters;
+package com.example.valoranttracker.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,8 +51,8 @@ public class OverviewAdapter extends RecyclerView.Adapter<OverviewAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            valueText = itemView.findViewById(R.id.valueTextView);
-            nameText = itemView.findViewById(R.id.nameTextView);
+            valueText = itemView.findViewById(R.id.overviewRowValueTextView);
+            nameText = itemView.findViewById(R.id.overviewRowNameTextView);
         }
     }
 

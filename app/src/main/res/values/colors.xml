@@ -6,4 +6,5 @@
     <color name="colorSurface">#3a4750</color>
     <color name="colorWin">#96ff96</color>
     <color name="colorLoss">#ff9696</color>
+    <color name="colorDraw">#b0afab</color>
 </resources>

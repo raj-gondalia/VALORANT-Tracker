@@ -1,4 +1,4 @@
-package com.example.valoranttracker.models;
+package com.example.valoranttracker.models.Profile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

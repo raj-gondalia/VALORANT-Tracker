@@ -3,70 +3,170 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:weightSum="100"
-    android:background="@color/colorLoss"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:layout_gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_weight="15"
-        android:src="@drawable/ico_spikerush"
-        android:id="@+id/modeImageView"/>
-
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_gravity="center"
-        android:layout_height="match_parent"
-        android:layout_weight="20"
-        android:scaleType="fitXY"
-        android:src="@drawable/phoenix"
-        android:id="@+id/agentImageView"/>
+    android:layout_height="wrap_content"
+    android:background="@color/colorSurface"
+    android:layout_marginTop="6dp"
+    android:id="@+id/careerLinearLayout"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="30"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="30sp"
-            android:text="Victory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aug 31"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#FFF"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textSize="35sp"
-            android:layout_gravity="center"
-            android:text="15 - 13"
-            android:textColor="#FFF"
-            android:id="@+id/roundsTextView"/>
+            android:textSize="20sp"
+            android:layout_marginBottom="6dp"
+            android:id="@+id/careerRowDateTextView"
+            android:textColor="@color/colorSurface"/>
 
 
     </LinearLayout>
 
-    <ImageView
-        android:layout_weight="35"
-        android:layout_width="0dp"
-        android:layout_gravity="center"
-        android:layout_height="match_parent"
-        android:src="@drawable/map_gradient"
-        android:background="@drawable/haven"
-        android:scaleType="fitXY"
-        android:id="@+id/mapImageView"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:weightSum="100"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="20"
+            android:scaleType="fitXY"
+            android:src="@drawable/phoenix"
+            android:id="@+id/careerRowAgentImageView"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Bind"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/careerRowMapTextView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="03:35pm"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/careerRowTimeTextView"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@drawable/spikerush"
+                    android:id="@+id/careerRowModeImageView"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Competitive"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:id="@+id/careerRowModeTextView"/>
+            </LinearLayout>
+
+        </LinearLayout>
 
 
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="16"
+            android:weightSum="100"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="bottom"
+                android:text="15 - 13"
+                android:textColor="#FFF"
+                android:id="@+id/careerRowRoundsTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="top"
+                android:text=""
+                android:textColor="#FFF"
+                android:id="@+id/careerRowMvpTextView"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="23"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:textSize="18sp"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="K/D/A"
+                android:textColor="#FFF"
+                android:id="@+id/careerRowKdaTextTextView"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:textSize="20sp"
+                android:layout_gravity="right"
+                android:gravity="top"
+                android:text="35/12/10"
+                android:textColor="#FFF"
+                android:id="@+id/careerRowKdaTextView"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

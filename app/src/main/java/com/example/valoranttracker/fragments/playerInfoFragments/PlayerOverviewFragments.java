@@ -1,4 +1,4 @@
-package com.example.valoranttracker.playerInfoFragments;
+package com.example.valoranttracker.fragments.playerInfoFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,12 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.valoranttracker.Adapters.OverviewAdapter;
+import com.example.valoranttracker.adapters.OverviewAdapter;
 import com.example.valoranttracker.MainActivity;
 import com.example.valoranttracker.R;
 import com.example.valoranttracker.ValorantAPI;
 import com.example.valoranttracker.models.OverviewModel;
-import com.example.valoranttracker.models.Profile;
+import com.example.valoranttracker.models.Profile.Profile;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,6 @@ public class PlayerOverviewFragments extends Fragment {
 
     private static final String TAG = "PlayerOverviewFragments";
     public static final String BASE_URL = "https://api.henrikdev.xyz";
-    private Button btn;
 
     private RecyclerView recyclerView;
 
@@ -50,16 +48,16 @@ public class PlayerOverviewFragments extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        recyclerView = view.findViewById(R.id.rvOverview);
+        recyclerView = view.findViewById(R.id.playerOverviewRecyclerView);
 
         ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Profile> call = valorantAPI.getData("RKtheGREAT007","8660");
+        Call<Profile> call = valorantAPI.getProfileData("RKtheGREAT007","8660");
 
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
-                Log.d(TAG, "onResponse: " + response.toString());
-                Log.d(TAG, "onResponse: " + response.body().toString());
+//                Log.d(TAG, "onResponse: " + response.toString());
+//                Log.d(TAG, "onResponse: " + response.body().toString());
 
                 if(!response.body().getStatus().equals("200")) {
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -104,4 +102,5 @@ public class PlayerOverviewFragments extends Fragment {
 
         return view;
     }
+
 }

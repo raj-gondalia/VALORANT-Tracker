@@ -6,7 +6,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.valoranttracker.Adapters.SectionPageAdapter;
+import com.example.valoranttracker.adapters.SectionPageAdapter;
+import com.example.valoranttracker.fragments.homeScreenFragments.HistoryFragment;
+import com.example.valoranttracker.fragments.homeScreenFragments.HomeFragment;
+import com.example.valoranttracker.fragments.homeScreenFragments.LeaderboardFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.container);
         setupViewPager();
 
-        mTabLayout = findViewById(R.id.tabLayout);
+        mTabLayout = findViewById(R.id.activityMainTabLayout);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        mToolbar = findViewById(R.id.toolBar);
+        mToolbar = findViewById(R.id.activityMainToolbar);
         mToolbar.setTitle("Valorant Tracker");
     }
 
