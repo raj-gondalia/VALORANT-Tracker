@@ -1,18 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="100"
+    android:layout_margin="3dp"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Leaderboard Fragment"
-        android:id="@+id/btnLeaderboard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_background"
+            android:textColor="@color/colorSurface"
+            android:layout_weight="20"
+            android:textSize="25sp"
+            android:text="Rank"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_weight="50">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorSurface"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/layout_background"
+                android:text="Game Name"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/colorSurface"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/layout_background"
+                android:text="Tag Line"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:textSize="15sp"
+            android:textColor="@color/colorSurface"
+            android:background="@drawable/layout_background"
+            android:text="Rating"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:textSize="15sp"
+            android:text="Wins"
+            android:textColor="@color/colorSurface"
+            android:background="@drawable/layout_background"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:id="@+id/leaderboardFragRecyclerView"/>
+</LinearLayout>

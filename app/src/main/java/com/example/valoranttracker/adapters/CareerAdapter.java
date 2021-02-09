@@ -45,10 +45,9 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
         holder.agentImageView.setImageResource(careerModel.getAgent());
         holder.kdaTextView.setText(careerModel.getKda());
-        holder.roundsTextView.setText(careerModel.getRoundswon() + " - " + careerModel.getRoundslost());
+        holder.roundsWonTextView.setText(String.valueOf(careerModel.getRoundswon()));
+        holder.roundsLostTextView.setText(String.valueOf(careerModel.getRoundslost()));
         holder.mapTextView.setText(careerModel.getMap());
-        holder.modeImageView.setImageResource(careerModel.getModeSrc());
-        holder.modeTextView.setText(careerModel.getMode());
 
         Timestamp timestamp = null;
 
@@ -62,19 +61,10 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
         }
 
         if(timestamp != null) {
-            if (position == 0 || (!careerModel.getTimestamp().substring(0, 10).equals(arrayList.get(position - 1).getTimestamp().substring(0, 10)))) {
-                holder.dateTextView.setVisibility(View.VISIBLE);
-                holder.dateTextView.setText(timestamp.toString().substring(0, 10));
-            } else {
-                holder.dateTextView.setVisibility(View.GONE);
-            }
-
+            holder.dateTextView.setText(timestamp.toString().substring(0, 10));
             holder.timeTextView.setText(timestamp.toString().substring(11, 16));
         }
 
-
-
-//        holder.timeTextView.setText();
     }
 
     @Override
@@ -84,21 +74,19 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView agentImageView, modeImageView;
-        private TextView mapTextView, modeTextView, roundsTextView, kdaTextView, timeTextView, mvpTextView, dateTextView;
+        private ImageView agentImageView;
+        private TextView mapTextView, kdaTextView, timeTextView, dateTextView, roundsWonTextView, roundsLostTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             agentImageView = itemView.findViewById(R.id.careerRowAgentImageView);
-            modeImageView = itemView.findViewById(R.id.careerRowModeImageView);
-            modeTextView = itemView.findViewById(R.id.careerRowModeTextView);
             mapTextView = itemView.findViewById(R.id.careerRowMapTextView);
-            roundsTextView = itemView.findViewById(R.id.careerRowRoundsTextView);
             kdaTextView = itemView.findViewById(R.id.careerRowKdaTextView);
             timeTextView = itemView.findViewById(R.id.careerRowTimeTextView);
-            mvpTextView = itemView.findViewById(R.id.careerRowMvpTextView);
             dateTextView = itemView.findViewById(R.id.careerRowDateTextView);
+            roundsLostTextView = itemView.findViewById(R.id.careerRowRoundsLostTextView);
+            roundsWonTextView = itemView.findViewById(R.id.careerRowRoundsWonTextView);
 
         }
     }

@@ -64,13 +64,18 @@ public class PlayerCareerFragment extends Fragment {
                     getActivity().finish();
                 }
 
-                Log.d(TAG, "onResponse: " + response.body().toString());
+//                Log.d(TAG, "onResponse: " + response.body().toString());
 
                 ArrayList<CareerModel> arrayList = new ArrayList<>();
                 for(int i =0; i < response.body().getMatches().size(); i++) {
                     if(!response.body().getMatches().get(i).isAvailable()) {
                         continue;
                     }
+
+                    if(!response.body().getMatches().get(i).getMetadata().getModename().equals("Competitive")) {
+                        continue;
+                    }
+
                     CareerModel careerModel = new CareerModel();
                     careerModel.setAgent(getResourceId(response.body().getMatches().get(i).getMetadata().getAgentplayed().toLowerCase(),
                             "drawable", getActivity().getPackageName()));
@@ -108,7 +113,7 @@ public class PlayerCareerFragment extends Fragment {
     }
 
     private int getResourceId(String variableName, String resourceName, String packageName) {
-        Log.d(TAG, "getResourceId: " + variableName + " " + getResources().getIdentifier(variableName, resourceName, packageName));
+//        Log.d(TAG, "getResourceId: " + variableName + " " + getResources().getIdentifier(variableName, resourceName, packageName));
         return getResources().getIdentifier(variableName, resourceName, packageName);
 
     }

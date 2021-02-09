@@ -84,7 +84,6 @@ public class PlayerOverviewFragments extends Fragment {
                 arrayList.add(new OverviewModel("flawless", Integer.toString(response.body().getStats().getFlawless())));
 
 
-
                 overviewAdapter = new OverviewAdapter(getActivity(), arrayList);
 
                 recyclerView.setAdapter(overviewAdapter);

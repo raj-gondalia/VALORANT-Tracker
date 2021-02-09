@@ -1,5 +1,6 @@
 package com.example.valoranttracker.models.Profile;
 
+
 import com.example.valoranttracker.models.Playtime.Playtime;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -65,6 +66,10 @@ public class Stats {
     @SerializedName("flawless")
     @Expose
     private int flawless;
+
+    @SerializedName("playercard")
+    @Expose
+    private String playercard;
 
     public String getRank() {
         return rank;
@@ -186,6 +191,14 @@ public class Stats {
         this.flawless = flawless;
     }
 
+    public String getPlayercard() {
+        return playercard;
+    }
+
+    public void setPlayercard(String playercard) {
+        this.playercard = playercard;
+    }
+
     @Override
     public String toString() {
         return "Stats{" +
@@ -193,7 +206,7 @@ public class Stats {
                 ", playtime=" + playtime +
                 ", matches=" + matches +
                 ", kills=" + kills +
-                ", deathes=" + deaths +
+                ", deaths=" + deaths +
                 ", assists=" + assists +
                 ", kdratio=" + kdratio +
                 ", headshots=" + headshots +
@@ -204,6 +217,7 @@ public class Stats {
                 ", aces=" + aces +
                 ", clutches=" + clutches +
                 ", flawless=" + flawless +
+                ", playercard='" + playercard + '\'' +
                 '}';
     }
 }
