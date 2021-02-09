@@ -3,6 +3,7 @@ package com.example.valoranttracker;
 import com.example.valoranttracker.models.Leaderboard.Leaderboard;
 import com.example.valoranttracker.models.Matches.Matches;
 import com.example.valoranttracker.models.Profile.Profile;
+import com.example.valoranttracker.models.Puuid.Puuid;
 import com.example.valoranttracker.models.Rank.Rank;
 
 import retrofit2.Call;
@@ -29,4 +30,8 @@ public interface ValorantAPI {
     @Headers("Content-Type: application/json")
     @GET("/valorant/v1/leaderboard/{region}")
     Call<Leaderboard> getLeaderboardData(@Path("region") String region);
+
+    @Headers("Content-Type: application/json")
+    @GET("/valorant/v1/puuid/{name}/{tag}")
+    Call<Puuid> getPuuidData(@Path("name") String name, @Path("tag") String tag);
 }

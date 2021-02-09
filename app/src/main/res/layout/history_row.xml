@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="3dp"
+    android:background="@color/colorSurface"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="GameName"
+        android:id="@+id/historyRowGameName"
+        android:layout_marginLeft="12dp"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:id="@+id/historyRowTag"
+        android:layout_marginLeft="12dp"
+        android:textColor="@android:color/white"
+        android:text="Tag"
+        android:textSize="20sp"/>
+
+</LinearLayout>

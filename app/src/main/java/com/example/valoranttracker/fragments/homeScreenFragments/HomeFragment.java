@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ public class HomeFragment extends Fragment {
 
     private static final String TAG = "HomeFragment";
 
-    private EditText etUserName, etTag;
+    private EditText gameName, tag;
     private MaterialButton btnSearch;
 
     @Nullable
@@ -28,17 +29,22 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
-        etUserName = view.findViewById(R.id.homeFragUserNameEditText);
-        etTag = view.findViewById(R.id.homeFragTagEditText);
+        gameName = view.findViewById(R.id.homeFragUserNameEditText);
+        tag = view.findViewById(R.id.homeFragTagEditText);
 
         btnSearch = view.findViewById(R.id.homeFragGoButton);
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Stats.class);
-                intent.putExtra("username", etUserName.getText().toString().trim());
-                intent.putExtra("tag", etTag.getText().toString().trim());
-                startActivity(intent);
+
+                if(gameName.getText().toString().trim() != null && tag.getText().toString().trim() != null) {
+                    Intent intent = new Intent(getActivity(), Stats.class);
+                    intent.putExtra("gameName", gameName.getText().toString().trim());
+                    intent.putExtra("tag", tag.getText().toString().trim());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), "Please enter name and tag!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

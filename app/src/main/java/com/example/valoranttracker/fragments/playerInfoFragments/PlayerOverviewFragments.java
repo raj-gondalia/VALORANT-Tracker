@@ -20,9 +20,12 @@ import com.example.valoranttracker.R;
 import com.example.valoranttracker.ValorantAPI;
 import com.example.valoranttracker.models.OverviewModel;
 import com.example.valoranttracker.models.Profile.Profile;
+import com.example.valoranttracker.models.Puuid.Puuid;
+import com.example.valoranttracker.models.RealmModel;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,8 +53,12 @@ public class PlayerOverviewFragments extends Fragment {
 
         recyclerView = view.findViewById(R.id.playerOverviewRecyclerView);
 
+        Bundle bundle = getActivity().getIntent().getExtras();
+        String gameName = bundle.getString("gameName");
+        String tag = bundle.getString("tag");
+
         ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Profile> call = valorantAPI.getProfileData("RKtheGREAT007","8660");
+        Call<Profile> call = valorantAPI.getProfileData(gameName,tag);
 
         call.enqueue(new Callback<Profile>() {
             @Override
@@ -60,12 +67,17 @@ public class PlayerOverviewFragments extends Fragment {
 //                Log.d(TAG, "onResponse: " + response.body().toString());
 
                 if(!response.body().getStatus().equals("200")) {
+
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
                     getActivity().finish();
                 }
+
+                String puuid = getPuuid(gameName, tag);
+
+                saveData(gameName, tag, puuid);
 
                 ArrayList<OverviewModel> arrayList = new ArrayList<>();
                 arrayList.add(new OverviewModel("playtime", response.body().getStats().getPlaytime().getPlaytimepatched()));
@@ -100,6 +112,60 @@ public class PlayerOverviewFragments extends Fragment {
         });
 
         return view;
+    }
+
+    private String getPuuid(String gameName, String tag) {
+
+        final String[] puuid = new String[1];
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
+        Call<Puuid> call = valorantAPI.getPuuidData(gameName, tag);
+
+        call.enqueue(new Callback<Puuid>() {
+            @Override
+            public void onResponse(Call<Puuid> call, Response<Puuid> response) {
+                puuid[0] = response.body().getData().getPuuid();
+            }
+
+            @Override
+            public void onFailure(Call<Puuid> call, Throwable t) {
+
+            }
+        });
+
+        return puuid[0];
+    }
+
+    private void saveData(String gameName, String tag, String puuid) {
+
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+
+        realm.executeTransactionAsync(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmModel realmModel = realm.createObject(RealmModel.class);
+                realmModel.setGameName(gameName);
+                realmModel.setTag(tag);
+                realmModel.setPlayerId(puuid);
+            }
+        }, new Realm.Transaction.OnSuccess() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "onSuccess: Data Saved");
+            }
+        }, new Realm.Transaction.OnError() {
+            @Override
+            public void onError(Throwable error) {
+                Log.d(TAG, "onError: " + error.getMessage());
+            }
+        });
+
     }
 
 }
