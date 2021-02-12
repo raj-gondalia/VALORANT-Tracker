@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Stats">
+    tools:context=".activities.Stats">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -19,11 +19,17 @@
             android:id="@+id/statsToolBar"
             app:navigationIcon="?attr/homeAsUpIndicator"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
+            android:background="@color/colorBar"
             android:layout_height="wrap_content"
+            app:tabTextColor="@color/colorDraw"
             android:id="@+id/statsTabLayout"/>
 
     </com.google.android.material.appbar.AppBarLayout>

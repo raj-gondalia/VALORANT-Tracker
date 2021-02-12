@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100"
+    android:background="@color/colorDraw"
     android:layout_margin="3dp"
-    android:background="@color/colorAccent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="8"
+        android:id="@+id/leaderboardFragLinearView"
         android:orientation="horizontal"
         android:weightSum="100">
 
@@ -21,6 +22,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/layout_background"
             android:textColor="@color/colorSurface"
+            android:fontFamily="@font/poly_regular"
             android:layout_weight="20"
             android:textSize="25sp"
             android:text="Rank"
@@ -37,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorSurface"
                 android:textSize="15sp"
+                android:fontFamily="@font/poly_regular"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:background="@drawable/layout_background"
@@ -48,6 +51,7 @@
                 android:textSize="15sp"
                 android:textColor="@color/colorSurface"
                 android:layout_weight="1"
+                android:fontFamily="@font/poly_regular"
                 android:gravity="center"
                 android:background="@drawable/layout_background"
                 android:text="Tag Line"/>
@@ -59,6 +63,7 @@
             android:layout_height="match_parent"
             android:layout_weight="15"
             android:textSize="15sp"
+            android:fontFamily="@font/poly_regular"
             android:textColor="@color/colorSurface"
             android:background="@drawable/layout_background"
             android:text="Rating"
@@ -68,6 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="15"
+            android:fontFamily="@font/poly_regular"
             android:textSize="15sp"
             android:text="Wins"
             android:textColor="@color/colorSurface"
@@ -78,6 +84,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="90"
+        android:layout_weight="92"
         android:id="@+id/leaderboardFragRecyclerView"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="100"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorSurface"
+        android:id="@+id/leaderboardFragProgressBar"/>
 </LinearLayout>

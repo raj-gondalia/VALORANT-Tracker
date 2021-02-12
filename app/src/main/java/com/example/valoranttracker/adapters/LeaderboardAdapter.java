@@ -1,17 +1,23 @@
 package com.example.valoranttracker.adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.valoranttracker.R;
+import com.example.valoranttracker.activities.Stats;
+import com.example.valoranttracker.database.DBHelper;
 import com.example.valoranttracker.models.LeaderboardModel;
+import com.example.valoranttracker.sharedPreferences.SharedPref;
 
 import java.util.ArrayList;
 
@@ -52,6 +58,22 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         holder.gameName.setText(leaderboardModel.getGameName());
         holder.tagLine.setText(leaderboardModel.getTagLine());
         holder.numberOfWins.setText(String.valueOf(leaderboardModel.getNumberOfWins()));
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBHelper dbHelper = new DBHelper(context);
+
+                dbHelper.insertHistory(leaderboardModel.getGameName(), leaderboardModel.getTagLine(), SharedPref.getInstance(context).getRegion());
+
+                Intent intent = new Intent(context, Stats.class);
+                intent.putExtra("gameName", leaderboardModel.getGameName());
+                intent.putExtra("tag", leaderboardModel.getTagLine());
+                context.startActivity(intent);
+
+                ((Activity)context).finish();
+            }
+        });
     }
 
     @Override
@@ -63,9 +85,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
         private TextView rank, rankedRating, numberOfWins, gameName, tagLine;
 
+        private LinearLayout linearLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            linearLayout = itemView.findViewById(R.id.leaderboardRowLinaerLayout);
             rank = itemView.findViewById(R.id.leaderboardRowRank);
             rankedRating = itemView.findViewById(R.id.leaderboardRowRankedRating);
             gameName = itemView.findViewById(R.id.leaderboardRowGameName);

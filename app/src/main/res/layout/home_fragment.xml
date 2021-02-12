@@ -8,10 +8,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:layout_gravity="right"
+        android:popupBackground="@color/colorDraw"
+        android:id="@+id/homeFragSpinner"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="30"
+        android:layout_weight="25"
         android:weightSum="100"
         android:orientation="horizontal">
 
@@ -28,6 +36,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/homeFragUserNameEditText"
                 android:background="#FFFFFF"
+                android:fontFamily="@font/poly_regular"
+                android:backgroundTint="@color/colorDraw"
                 android:scrollIndicators="top"
                 android:inputType="text"
                 android:maxLines="1"/>
@@ -47,8 +57,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/homeFragTagEditText"
                 android:background="#FFFFFF"
+                android:fontFamily="@font/poly_regular"
+                android:backgroundTint="@color/colorDraw"
                 android:scrollIndicators="top"
-                android:inputType="numberDecimal"
+                android:inputType="text"
                 android:maxLines="1"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,11 +70,19 @@
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:layout_weight="20"
+            android:fontFamily="@font/poly_regular"
             android:layout_margin="4dp"
             android:background="@drawable/button_background"
             android:id="@+id/homeFragGoButton"
             android:text="Go"/>
     </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/homeFragProgressBar"/>
 
 
 

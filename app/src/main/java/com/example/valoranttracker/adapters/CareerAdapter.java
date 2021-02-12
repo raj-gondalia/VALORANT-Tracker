@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.valoranttracker.R;
+import com.example.valoranttracker.dialog.MatchDialog;
 import com.example.valoranttracker.models.CareerModel;
 
 import java.sql.Timestamp;
@@ -65,6 +67,14 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
             holder.timeTextView.setText(timestamp.toString().substring(11, 16));
         }
 
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MatchDialog matchDialog = new MatchDialog(context, careerModel.getGameid());
+                matchDialog.show();
+            }
+        });
+
     }
 
     @Override
@@ -75,10 +85,13 @@ public class CareerAdapter extends RecyclerView.Adapter<CareerAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView agentImageView;
+        private LinearLayout linearLayout;
         private TextView mapTextView, kdaTextView, timeTextView, dateTextView, roundsWonTextView, roundsLostTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            linearLayout = itemView.findViewById(R.id.careerRowLinearLayout);
 
             agentImageView = itemView.findViewById(R.id.careerRowAgentImageView);
             mapTextView = itemView.findViewById(R.id.careerRowMapTextView);

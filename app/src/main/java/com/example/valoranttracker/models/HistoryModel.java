@@ -5,9 +5,18 @@ public class HistoryModel {
     private String gameName;
     private String tag;
     private String playerId;
+    private String region;
 
     public HistoryModel() {
 
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getGameName() {

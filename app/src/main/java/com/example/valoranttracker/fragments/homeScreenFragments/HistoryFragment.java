@@ -1,26 +1,24 @@
 package com.example.valoranttracker.fragments.homeScreenFragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.valoranttracker.database.DBHelper;
 import com.example.valoranttracker.R;
-import com.example.valoranttracker.models.RealmModel;
+import com.example.valoranttracker.adapters.HistoryAdapter;
+import com.example.valoranttracker.models.HistoryModel;
 
 import java.util.ArrayList;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
@@ -41,39 +39,17 @@ public class HistoryFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.historyFragRecyclerView);
 
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
+        DBHelper dbHelper = new DBHelper(getContext());
 
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmResults<RealmModel> realmModels = realm.where(RealmModel.class).findAll();
+        List<HistoryModel> historyModels = dbHelper.getHistory();
 
-                ArrayList<RealmModel> arrayList = new ArrayList<>();
+        HistoryAdapter adapter = new HistoryAdapter(getContext(), (ArrayList<HistoryModel>) historyModels);
 
-                Log.d(TAG, "execute: " + realmModels.toString());
+        progressBar.setVisibility(View.GONE);
 
-                progressBar.setVisibility(View.GONE);
-
-                for(RealmModel realmModel : realmModels) {
-                    arrayList.add(realmModel);
-                }
-
-
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-
-                Log.d(TAG, "onSuccess: Successfully read");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                Log.d(TAG, "onError: " + error.getMessage());
-            }
-        });
-
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return(view);
     }
 }

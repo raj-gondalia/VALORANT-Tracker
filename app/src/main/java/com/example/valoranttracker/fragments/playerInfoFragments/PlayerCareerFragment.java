@@ -2,10 +2,11 @@ package com.example.valoranttracker.fragments.playerInfoFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,19 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.valoranttracker.adapters.CareerAdapter;
-import com.example.valoranttracker.MainActivity;
+import com.example.valoranttracker.activities.MainActivity;
 import com.example.valoranttracker.R;
-import com.example.valoranttracker.ValorantAPI;
+import com.example.valoranttracker.net.ValorantAPI;
 import com.example.valoranttracker.models.CareerModel;
-import com.example.valoranttracker.models.Matches.Matches;
+import com.example.valoranttracker.net.Matches.Matches;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.view.View.GONE;
 
 public class PlayerCareerFragment extends Fragment {
 
@@ -36,6 +41,8 @@ public class PlayerCareerFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private CareerAdapter adapter;
+    private ProgressBar progressBar;
+    private LinearLayout linearLayout;
 
     @Nullable
     @Override
@@ -43,70 +50,97 @@ public class PlayerCareerFragment extends Fragment {
         View view = inflater.inflate(R.layout.player_career_fragment, container, false);
 
         recyclerView = view.findViewById(R.id.playerCareerFragRecyclerView);
+        progressBar = view.findViewById(R.id.playerCareerFragProgressBar);
+        linearLayout = view.findViewById(R.id.playerCareerFragLinearLayout);
+
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(GONE);
+        linearLayout.setVisibility(GONE);
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
+        Bundle bundle = getActivity().getIntent().getExtras();
+        String gameName = bundle.getString("gameName");
+        String tag = bundle.getString("tag");
+
         ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Matches> call = valorantAPI.getMatchesData("RKtheGREAT007","8660");
+        valorantAPI.getMatchesData(gameName,tag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Matches>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        progressBar.setVisibility(View.GONE);
 
-        call.enqueue(new Callback<Matches>() {
-            @Override
-            public void onResponse(Call<Matches> call, Response<Matches> response) {
-
-                if(!response.body().getStatus().equals("200")) {
-                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
-
-//                Log.d(TAG, "onResponse: " + response.body().toString());
-
-                ArrayList<CareerModel> arrayList = new ArrayList<>();
-                for(int i =0; i < response.body().getMatches().size(); i++) {
-                    if(!response.body().getMatches().get(i).isAvailable()) {
-                        continue;
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
-                    if(!response.body().getMatches().get(i).getMetadata().getModename().equals("Competitive")) {
-                        continue;
+                    @Override
+                    public void onComplete() {
+
                     }
 
-                    CareerModel careerModel = new CareerModel();
-                    careerModel.setAgent(getResourceId(response.body().getMatches().get(i).getMetadata().getAgentplayed().toLowerCase(),
-                            "drawable", getActivity().getPackageName()));
-                    careerModel.setMap(response.body().getMatches().get(i).getMetadata().getMap());
-                    careerModel.setModeSrc(getResourceId(response.body().getMatches().get(i).getMetadata().getModename().toLowerCase(),
-                            "drawable", getActivity().getPackageName()));
-                    careerModel.setMode(response.body().getMatches().get(i).getMetadata().getModename());
-                    careerModel.setKda(response.body().getMatches().get(i).getGame().getKda().getKda());
-                    careerModel.setGameid(response.body().getMatches().get(i).getMetadata().getGameid());
-                    careerModel.setPlayerhaswon(response.body().getMatches().get(i).getMetadata().isPlayerhaswon());
-                    careerModel.setRoundslost(response.body().getMatches().get(i).getGame().getRoundslost());
-                    careerModel.setRoundswon(response.body().getMatches().get(i).getGame().getRoundswon());
-                    careerModel.setTimestamp(response.body().getMatches().get(i).getMetadata().getTimestamp());
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-                    arrayList.add(careerModel);
-                }
+                    }
 
-                adapter = new CareerAdapter(getContext(), arrayList);
+                    @Override
+                    public void onNext(Matches matches) {
+                        if(!matches.getStatus().equals("200")) {
+                            Toast.makeText(getActivity(), matches.getMessage(), Toast.LENGTH_SHORT).show();
 
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                recyclerView.setHasFixedSize(true);
+                            progressBar.setVisibility(GONE);
+
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+
+                        ArrayList<CareerModel> arrayList = new ArrayList<>();
+                        for(int i =0; i < matches.getMatches().size(); i++) {
+                            if(!matches.getMatches().get(i).isAvailable()) {
+                                continue;
+                            }
+
+                            if(!matches.getMatches().get(i).getMetadata().getModename().equals("Competitive")) {
+                                continue;
+                            }
+
+                            CareerModel careerModel = new CareerModel();
+                            careerModel.setAgent(getResourceId(matches.getMatches().get(i).getMetadata().getAgentplayed().toLowerCase(),
+                                    "drawable", getActivity().getPackageName()));
+                            careerModel.setMap(matches.getMatches().get(i).getMetadata().getMap());
+                            careerModel.setModeSrc(getResourceId(matches.getMatches().get(i).getMetadata().getModename().toLowerCase(),
+                                    "drawable", getActivity().getPackageName()));
+                            careerModel.setMode(matches.getMatches().get(i).getMetadata().getModename());
+                            careerModel.setKda(matches.getMatches().get(i).getGame().getKda().getKda());
+                            careerModel.setGameid(matches.getMatches().get(i).getMetadata().getGameid());
+                            careerModel.setPlayerhaswon(matches.getMatches().get(i).getMetadata().isPlayerhaswon());
+                            careerModel.setRoundslost(matches.getMatches().get(i).getGame().getRoundslost());
+                            careerModel.setRoundswon(matches.getMatches().get(i).getGame().getRoundswon());
+                            careerModel.setTimestamp(matches.getMatches().get(i).getMetadata().getTimestamp());
+
+                            arrayList.add(careerModel);
+                        }
 
 
-            }
+                        progressBar.setVisibility(GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        linearLayout.setVisibility(View.VISIBLE);
 
-            @Override
-            public void onFailure(Call<Matches> call, Throwable t) {
+                        adapter = new CareerAdapter(getContext(), arrayList);
 
-            }
-        });
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setHasFixedSize(true);
+                    }
+                });
 
 
         return view;

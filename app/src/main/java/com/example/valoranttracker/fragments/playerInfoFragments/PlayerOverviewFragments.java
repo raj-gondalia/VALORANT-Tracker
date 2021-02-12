@@ -1,35 +1,34 @@
 package com.example.valoranttracker.fragments.playerInfoFragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.valoranttracker.adapters.OverviewAdapter;
-import com.example.valoranttracker.MainActivity;
+import com.example.valoranttracker.activities.MainActivity;
 import com.example.valoranttracker.R;
-import com.example.valoranttracker.ValorantAPI;
-import com.example.valoranttracker.models.OverviewModel;
-import com.example.valoranttracker.models.Profile.Profile;
-import com.example.valoranttracker.models.Puuid.Puuid;
-import com.example.valoranttracker.models.RealmModel;
+import com.example.valoranttracker.net.ValorantAPI;
+import com.example.valoranttracker.net.Profile.Profile;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
-import io.realm.Realm;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PlayerOverviewFragments extends Fragment {
@@ -37,9 +36,12 @@ public class PlayerOverviewFragments extends Fragment {
     private static final String TAG = "PlayerOverviewFragments";
     public static final String BASE_URL = "https://api.henrikdev.xyz";
 
-    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private LinearLayout linearLayout1, linearLayout2;
 
-    private OverviewAdapter overviewAdapter;
+    private TextView gameNameTextView, tagTextView, playTimeTextView, matchesTextView, winsTextView, winPercenTextView, killsTextView, assistsTextView, flawlessTextView,
+                            deathsText, kdRatioTextView, headshotsTextView, headshotpercenTextView, firstbloodsTextView, acesTextView, clutchesTextView;
+    private ImageView playerCardImageView;
 
     @Nullable
     @Override
@@ -48,124 +50,110 @@ public class PlayerOverviewFragments extends Fragment {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        recyclerView = view.findViewById(R.id.playerOverviewRecyclerView);
+        gameNameTextView = view.findViewById(R.id.playerOverviewFragGameNameTextView);
+        acesTextView = view.findViewById(R.id.playerOverviewFragAcesTextView);
+        clutchesTextView = view.findViewById(R.id.playerOverviewFragClutchesTextView);
+        assistsTextView = view.findViewById(R.id.playerOverviewFragAssitsTextView);
+        killsTextView = view.findViewById(R.id.playerOverviewFragKillsTextView);
+        deathsText = view.findViewById(R.id.playerOverviewFragDeathsTextView);
+        firstbloodsTextView = view.findViewById(R.id.playerOverviewFragFirstBloodsTextView);
+        flawlessTextView = view.findViewById(R.id.playerOverviewFragFlawlessTextView);
+        matchesTextView = view.findViewById(R.id.playerOverviewFragGamesPlayedTextView);
+        headshotpercenTextView = view.findViewById(R.id.playerOverviewFragHeadshotPercentageTextView);
+        headshotsTextView = view.findViewById(R.id.playerOverviewFragHeadshotsTextView);
+        kdRatioTextView = view.findViewById(R.id.playerOverviewFragKDRatioTextView);
+        playerCardImageView = view.findViewById(R.id.playerOverviewFragPlayerCardImageView);
+        playTimeTextView = view.findViewById(R.id.playerOverviewFragTimePLayedTextView);
+        tagTextView = view.findViewById(R.id.playerOverviewFragTagTextView);
+        winPercenTextView = view.findViewById(R.id.playerOverviewFragWinPercentageTextView);
+        winsTextView = view.findViewById(R.id.playerOverviewFragWinsTextView);
+
+        progressBar = view.findViewById(R.id.playerOverviewFragProgressBar);
+
+        linearLayout1 = view.findViewById(R.id.playerOverviewFragLinearLayout1);
+        linearLayout2 = view.findViewById(R.id.playerOverviewFragLinearLayout2);
+
+        linearLayout1.setVisibility(View.GONE);
+        linearLayout2.setVisibility(View.VISIBLE);
+
 
         Bundle bundle = getActivity().getIntent().getExtras();
         String gameName = bundle.getString("gameName");
         String tag = bundle.getString("tag");
 
         ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Profile> call = valorantAPI.getProfileData(gameName,tag);
+        valorantAPI.getProfileData(gameName,tag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Profile>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        call.enqueue(new Callback<Profile>() {
-            @Override
-            public void onResponse(Call<Profile> call, Response<Profile> response) {
-//                Log.d(TAG, "onResponse: " + response.toString());
-//                Log.d(TAG, "onResponse: " + response.body().toString());
+                    }
 
-                if(!response.body().getStatus().equals("200")) {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onNext(Profile profile) {
+                        if(!profile.getStatus().equals("200")) {
 
-                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onNext: " + profile.getStatus() + " mess: " + profile.getMessage());
 
-                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
+                            Toast.makeText(getActivity(), profile.getMessage(), Toast.LENGTH_SHORT).show();
 
-                String puuid = getPuuid(gameName, tag);
-
-                saveData(gameName, tag, puuid);
-
-                ArrayList<OverviewModel> arrayList = new ArrayList<>();
-                arrayList.add(new OverviewModel("playtime", response.body().getStats().getPlaytime().getPlaytimepatched()));
-                arrayList.add(new OverviewModel("matches", Integer.toString(response.body().getStats().getMatches())));
-                arrayList.add(new OverviewModel("kills", Integer.toString(response.body().getStats().getKills())));
-                arrayList.add(new OverviewModel("deathes", Integer.toString(response.body().getStats().getDeaths())));
-                arrayList.add(new OverviewModel("assits", Integer.toString(response.body().getStats().getAssists())));
-                arrayList.add(new OverviewModel("kd ratio", Double.toString(response.body().getStats().getKdratio())));
-                arrayList.add(new OverviewModel("headshots", Integer.toString(response.body().getStats().getHeadshots())));
-                arrayList.add(new OverviewModel("headshot %", Double.toString(response.body().getStats().getHeadshotpercentage())));
-                arrayList.add(new OverviewModel("wins", Integer.toString(response.body().getStats().getWins())));
-                arrayList.add(new OverviewModel("win %", Double.toString(response.body().getStats().getWinpercentage())));
-                arrayList.add(new OverviewModel("firstbloods", Integer.toString(response.body().getStats().getFirstbloods())));
-                arrayList.add(new OverviewModel("aces", Integer.toString(response.body().getStats().getAces())));
-                arrayList.add(new OverviewModel("clutches", Integer.toString(response.body().getStats().getClutches())));
-                arrayList.add(new OverviewModel("flawless", Integer.toString(response.body().getStats().getFlawless())));
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
 
 
-                overviewAdapter = new OverviewAdapter(getActivity(), arrayList);
+                        linearLayout1.setVisibility(View.VISIBLE);
+                        linearLayout2.setVisibility(View.GONE);
 
-                recyclerView.setAdapter(overviewAdapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        Picasso.get()
+                                .load(profile.getStats().getPlayercard())
+                                .into(playerCardImageView);
 
-            }
+                        playTimeTextView.setText(profile.getStats().getPlaytime().getPlaytimepatched());
+                        matchesTextView.setText("Played - " + profile.getStats().getMatches());
+                        killsTextView.setText("Kills - " + profile.getStats().getKills());
+                        deathsText.setText("Deaths - " + profile.getStats().getDeaths());
+                        assistsTextView.setText("Assits - " + profile.getStats().getAssists());
+                        kdRatioTextView.setText("KD Ratio - " + profile.getStats().getKdratio());
+                        headshotsTextView.setText("Headshots - " + profile.getStats().getHeadshots());
+                        headshotpercenTextView.setText("Headshot Percentage - " + profile.getStats().getHeadshotpercentage());
+                        winsTextView.setText("Wins - " + profile.getStats().getWins());
+                        winPercenTextView.setText("Win Percentage - " + profile.getStats().getWinpercentage());
+                        firstbloodsTextView.setText("Firstbloods - " + profile.getStats().getFirstbloods());
+                        acesTextView.setText("Aces - " + profile.getStats().getAces());
+                        clutchesTextView.setText("Clutches - " + profile.getStats().getClutches());
+                        flawlessTextView.setText("Flawless - " + profile.getStats().getFlawless());
+                        gameNameTextView.setText(gameName);
+                        tagTextView.setText(tag);
+                    }
 
-            @Override
-            public void onFailure(Call<Profile> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getMessage());
-                Toast.makeText(getActivity(), "Something went wrong!", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+                        Toast.makeText(getActivity(), "Something went wrong! Maybe the account is private. Activate it by logging into tracer.gg.", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
         return view;
     }
 
-    private String getPuuid(String gameName, String tag) {
 
-        final String[] puuid = new String[1];
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Puuid> call = valorantAPI.getPuuidData(gameName, tag);
-
-        call.enqueue(new Callback<Puuid>() {
-            @Override
-            public void onResponse(Call<Puuid> call, Response<Puuid> response) {
-                puuid[0] = response.body().getData().getPuuid();
-            }
-
-            @Override
-            public void onFailure(Call<Puuid> call, Throwable t) {
-
-            }
-        });
-
-        return puuid[0];
-    }
-
-    private void saveData(String gameName, String tag, String puuid) {
-
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                RealmModel realmModel = realm.createObject(RealmModel.class);
-                realmModel.setGameName(gameName);
-                realmModel.setTag(tag);
-                realmModel.setPlayerId(puuid);
-            }
-        }, new Realm.Transaction.OnSuccess() {
-            @Override
-            public void onSuccess() {
-                Log.d(TAG, "onSuccess: Data Saved");
-            }
-        }, new Realm.Transaction.OnError() {
-            @Override
-            public void onError(Throwable error) {
-                Log.d(TAG, "onError: " + error.getMessage());
-            }
-        });
-
-    }
 
 }

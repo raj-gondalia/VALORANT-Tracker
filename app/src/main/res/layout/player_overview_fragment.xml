@@ -1,18 +1,361 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/colorSurface"
+    android:layout_height="wrap_content">
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/playerOverviewRecyclerView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingBottom="60dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/playerOverviewFragLinearLayout1"
+            android:layout_marginBottom="12dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:weightSum="5"
+                android:layout_margin="12dp"
+                android:layout_height="200dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:layout_weight="2"
+                    android:id="@+id/playerOverviewFragPlayerCardImageView"
+                    android:src="@drawable/radiant"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:padding="12dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="26sp"
+                        android:id="@+id/playerOverviewFragGameNameTextView"
+                        android:gravity="center"
+                        android:text="RKtheGREAT007"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:text="8660"
+                        android:id="@+id/playerOverviewFragTagTextView"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="26sp"
+                        android:gravity="center"
+                        android:id="@+id/playerOverviewFragTimePLayedTextView"
+                        android:text="4D 18H 6M 31S"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/poly_italic"
+                    android:textColor="@color/colorDraw"
+                    android:gravity="center"
+                    android:text="Matches"
+                    android:layout_gravity="center"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:padding="12dp"
+                    android:background="@drawable/overview_background"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/playerOverviewFragGamesPlayedTextView"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="Played - 307"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:id="@+id/playerOverviewFragWinsTextView"
+                        android:gravity="center"
+                        android:text="Wins - 136"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:id="@+id/playerOverviewFragWinPercentageTextView"
+                        android:text="Win Percentage - 50.87%"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/poly_italic"
+                    android:textColor="@color/colorDraw"
+                    android:gravity="center"
+                    android:text="KDA"
+                    android:layout_gravity="left"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="4"
+                    android:padding="12dp"
+                    android:background="@drawable/overview_background"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="Kills - 4996"
+                        android:id="@+id/playerOverviewFragKillsTextView"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="Deaths - 4648"
+                        android:id="@+id/playerOverviewFragDeathsTextView"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:id="@+id/playerOverviewFragAssitsTextView"
+                        android:text="Assists - 1152"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:id="@+id/playerOverviewFragKDRatioTextView"
+                        android:gravity="center"
+                        android:text="KD ratio - 0.98"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textSize="26sp"
+                    android:fontFamily="@font/poly_italic"
+                    android:textColor="@color/colorDraw"
+                    android:gravity="center"
+                    android:text="Precision"
+                    android:layout_gravity="center"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:padding="12dp"
+                    android:background="@drawable/overview_background"
+                    android:layout_height="0dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/playerOverviewFragHeadshotsTextView"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="Headshots - 1668"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:textSize="20sp"
+                        android:id="@+id/playerOverviewFragHeadshotPercentageTextView"
+                        android:gravity="center"
+                        android:text="Headshot Percentage - 10.26"
+                        android:textColor="@color/colorDraw"
+                        android:fontFamily="@font/poly_regular"/>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDraw"
+                android:textSize="26sp"
+                android:layout_margin="12dp"
+                android:background="@drawable/overview_background"
+                android:padding="12dp"
+                android:id="@+id/playerOverviewFragFirstBloodsTextView"
+                android:fontFamily="@font/poly_italic"
+                android:text="Firstbloods - 787"
+                android:gravity="center"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDraw"
+                android:textSize="26sp"
+                android:layout_margin="12dp"
+                android:background="@drawable/overview_background"
+                android:padding="12dp"
+                android:id="@+id/playerOverviewFragAcesTextView"
+                android:fontFamily="@font/poly_italic"
+                android:text="Aces  - 83"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDraw"
+                android:textSize="26sp"
+                android:layout_margin="12dp"
+                android:background="@drawable/overview_background"
+                android:padding="12dp"
+                android:id="@+id/playerOverviewFragClutchesTextView"
+                android:fontFamily="@font/poly_italic"
+                android:text="Clutches  - 441"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDraw"
+                android:textSize="26sp"
+                android:layout_margin="12dp"
+                android:background="@drawable/overview_background"
+                android:padding="12dp"
+                android:id="@+id/playerOverviewFragFlawlessTextView"
+                android:fontFamily="@font/poly_italic"
+                android:text="Flawless  - 221"
+                android:gravity="center"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:id="@+id/playerOverviewFragLinearLayout2"
+            android:visibility="gone"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/playerOverviewFragProgressBar"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</ScrollView>

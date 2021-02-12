@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorDraw"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/historyFragProgressBar"
+        android:indeterminateTint="@color/colorSurface"
         app:layout_constraintBottom_toBottomOf="@+id/historyFragRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

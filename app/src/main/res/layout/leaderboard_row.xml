@@ -2,11 +2,12 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="70dp"
     android:layout_margin="3dp"
     android:background="@drawable/layout_background"
     android:backgroundTint="@color/colorSurface"
     android:orientation="horizontal"
+    android:id="@+id/leaderboardRowLinaerLayout"
     android:weightSum="100">
 
     <TextView
@@ -14,8 +15,9 @@
         android:layout_height="match_parent"
         android:layout_weight="20"
         android:textSize="30sp"
+        android:fontFamily="@font/poly_italic"
         android:text="100th"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorDraw"
         android:gravity="center"
         android:id="@+id/leaderboardRowRank"/>
 
@@ -30,7 +32,8 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
+            android:fontFamily="@font/poly_regular"
+            android:textColor="@color/colorDraw"
             android:gravity="center"
             android:text="RKtheGREAT007"
             android:id="@+id/leaderboardRowGameName"/>
@@ -39,10 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:fontFamily="@font/poly_regular"
             android:layout_weight="1"
             android:gravity="center"
             android:text="8660"
-            android:textColor="@android:color/white"
+            android:textColor="@color/colorDraw"
             android:id="@+id/leaderboardRowTagLine"/>
 
     </LinearLayout>
@@ -53,17 +57,36 @@
         android:layout_weight="15"
         android:textSize="25sp"
         android:text="736"
-        android:textColor="@android:color/white"
+        android:fontFamily="@font/poly_regular"
+        android:textColor="@color/colorDraw"
         android:gravity="center"
         android:id="@+id/leaderboardRowRankedRating"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="15"
-        android:textSize="25sp"
-        android:text="98"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:id="@+id/leaderboardRowWins"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:textSize="25sp"
+            android:text="98"
+            android:fontFamily="@font/poly_regular"
+            android:gravity="center"
+            android:textColor="@color/colorDraw"
+            android:id="@+id/leaderboardRowWins"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="right"
+            android:src="@android:drawable/ic_menu_search"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

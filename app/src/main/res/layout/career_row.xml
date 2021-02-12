@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
     android:background="@color/colorSurface"
-    android:id="@+id/careerLinearLayout"
+    android:id="@+id/careerRowLinearLayout"
     android:orientation="vertical">
 
 
@@ -39,6 +39,7 @@
                 android:text="Icebox"
                 android:layout_weight="50"
                 android:gravity="center"
+                android:fontFamily="@font/poly_regular"
                 android:textSize="30sp"
                 android:textColor="@android:color/white"
                 android:id="@+id/careerRowMapTextView"/>
@@ -49,6 +50,7 @@
                 android:layout_weight="25"
                 android:text="2017/02/03"
                 android:gravity="center"
+                android:fontFamily="@font/poly_regular"
                 android:textSize="12sp"
                 android:id="@+id/careerRowDateTextView"
                 android:textColor="@android:color/white"/>
@@ -59,6 +61,7 @@
                 android:layout_weight="25"
                 android:text="03:35pm"
                 android:gravity="center"
+                android:fontFamily="@font/poly_regular"
                 android:textSize="12sp"
                 android:textColor="@android:color/white"
                 android:id="@+id/careerRowTimeTextView"/>
@@ -82,6 +85,7 @@
                 android:textSize="35sp"
                 android:gravity="center"
                 android:text="15"
+                android:fontFamily="@font/poly_italic"
                 android:textColor="@color/colorWin"
                 android:id="@+id/careerRowRoundsWonTextView"/>
 
@@ -91,6 +95,7 @@
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:gravity="center"
+                android:fontFamily="@font/poly_italic"
                 android:text="-"
                 android:textColor="#FFF"/>
 
@@ -101,20 +106,38 @@
                 android:gravity="center"
                 android:text="13"
                 android:layout_weight="1"
+                android:fontFamily="@font/poly_italic"
                 android:textColor="@color/colorLoss"
                 android:id="@+id/careerRowRoundsLostTextView"/>
 
         </LinearLayout>
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="25"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:text="35/12/10"
-            android:textColor="#FFF"
-            android:id="@+id/careerRowKdaTextView"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="35/12/10"
+                android:textColor="#FFF"
+                android:fontFamily="@font/poly_regular"
+                android:id="@+id/careerRowKdaTextView"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="right"
+                android:src="@android:drawable/ic_menu_search"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

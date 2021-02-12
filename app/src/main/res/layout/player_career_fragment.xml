@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum="100"
     android:layout_margin="3dp"
-    android:background="@color/colorAccent"
+    android:background="@color/colorDraw"
     android:orientation="vertical">
 
     <LinearLayout
@@ -14,6 +14,8 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:weightSum="100"
+        android:visibility="gone"
+        android:id="@+id/playerCareerFragLinearLayout"
         android:orientation="horizontal">
 
         <TextView
@@ -22,6 +24,7 @@
             android:layout_weight="20"
             android:gravity="center"
             android:textSize="20sp"
+            android:fontFamily="@font/poly_regular"
             android:background="@drawable/layout_background"
             android:textColor="@color/colorSurface"
             android:text="Agent"/>
@@ -40,6 +43,7 @@
                 android:layout_weight="50"
                 android:gravity="center"
                 android:textSize="20sp"
+                android:fontFamily="@font/poly_regular"
                 android:background="@drawable/layout_background"
                 android:textColor="@color/colorSurface"/>
 
@@ -47,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="50"
+                android:fontFamily="@font/poly_regular"
                 android:text="Date and Time"
                 android:background="@drawable/layout_background"
                 android:textColor="@color/colorSurface"
@@ -66,6 +71,7 @@
             android:textColor="@color/colorSurface"
             android:textSize="20sp"
             android:gravity="center"
+            android:fontFamily="@font/poly_regular"
             android:text="Rounds"
             android:background="@drawable/layout_background"/>
 
@@ -77,6 +83,7 @@
             android:layout_weight="25"
             android:textSize="20sp"
             android:gravity="center"
+            android:fontFamily="@font/poly_regular"
             android:background="@drawable/layout_background"
             android:text="K/D/A"
             android:textColor="@color/colorSurface"/>
@@ -87,5 +94,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="90"
+        android:visibility="gone"
         android:id="@+id/playerCareerFragRecyclerView"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="100"
+        android:indeterminateTint="@color/colorSurface"
+        android:layout_gravity="center"
+        android:id="@+id/playerCareerFragProgressBar"/>
 </LinearLayout>

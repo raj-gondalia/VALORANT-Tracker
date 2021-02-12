@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorSurface"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -17,13 +17,17 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:id="@+id/activityMainToolbar"/>
+            android:id="@+id/activityMainToolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
+            android:background="@color/colorBar"
             android:layout_height="wrap_content"
+            app:tabTextColor="@color/colorDraw"
+            android:focusableInTouchMode="true"
             android:id="@+id/activityMainTabLayout"/>
 
 

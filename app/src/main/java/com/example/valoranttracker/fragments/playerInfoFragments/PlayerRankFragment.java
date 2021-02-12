@@ -1,12 +1,12 @@
 package com.example.valoranttracker.fragments.playerInfoFragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -18,13 +18,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.valoranttracker.R;
-import com.example.valoranttracker.ValorantAPI;
-import com.example.valoranttracker.models.Rank.Rank;
+import com.example.valoranttracker.net.ValorantAPI;
+import com.example.valoranttracker.net.Rank.Rank;
+import com.example.valoranttracker.sharedPreferences.SharedPref;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.view.View.GONE;
@@ -53,6 +56,18 @@ public class PlayerRankFragment extends Fragment {
         progressBar = view.findViewById(R.id.playerRankFragProgressBar);
         rankRatingText = view.findViewById(R.id.playerRankFragRankRatingText);
 
+        progressBar.setVisibility(View.VISIBLE);
+        seekBar.setVisibility(View.GONE);
+        eloTextView.setVisibility(View.GONE);
+        rankImageView.setVisibility(View.GONE);
+        rankingInTierTextView.setVisibility(View.GONE);
+        rankTextView.setVisibility(View.GONE);
+        rankRatingText.setVisibility(View.GONE);
+
+        Bundle bundle = getActivity().getIntent().getExtras();
+        String gameName = bundle.getString("gameName");
+        String tag = bundle.getString("tag");
+
         seekBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -62,47 +77,59 @@ public class PlayerRankFragment extends Fragment {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        String region = SharedPref.getInstance(getContext()).getRegion();
+
+        Log.d(TAG, "onCreateView: " + region + " " + gameName + " " + tag);
         ValorantAPI valorantAPI = retrofit.create(ValorantAPI.class);
-        Call<Rank> call = valorantAPI.getRankData("ap", "RKtheGREAT007", "8660");
+        valorantAPI.getRankData(region, gameName, tag)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Rank>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        call.enqueue(new Callback<Rank>() {
-            @Override
-            public void onResponse(Call<Rank> call, Response<Rank> response) {
-//                Log.d(TAG, "onResponse: " + response.body().toString());
+                    }
 
-                progressBar.setVisibility(GONE);
-                seekBar.setVisibility(View.VISIBLE);
-                eloTextView.setVisibility(View.VISIBLE);
-                rankImageView.setVisibility(View.VISIBLE);
-                rankingInTierTextView.setVisibility(View.VISIBLE);
-                rankTextView.setVisibility(View.VISIBLE);
-                rankRatingText.setVisibility(View.VISIBLE);
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onNext(Rank rank) {
+                        progressBar.setVisibility(GONE);
+                        seekBar.setVisibility(View.VISIBLE);
+                        eloTextView.setVisibility(View.VISIBLE);
+                        rankImageView.setVisibility(View.VISIBLE);
+                        rankingInTierTextView.setVisibility(View.VISIBLE);
+                        rankTextView.setVisibility(View.VISIBLE);
+                        rankRatingText.setVisibility(View.VISIBLE);
 
-                rankRatingText.setText("Rank Rating");
-                seekBar.setProgress(response.body().getData().getRankingInTier());
-                eloTextView.setText("Elo - " + response.body().getData().getElo());
-                rankTextView.setText(response.body().getData().getCurrentTierPatched());
-                rankingInTierTextView.setText(response.body().getData().getRankingInTier() + "/100");
+                        rankRatingText.setText("Rank Rating");
+                        seekBar.setProgress(rank.getData().getRankingInTier());
+                        eloTextView.setText("Elo - " + rank.getData().getElo());
+                        rankTextView.setText(rank.getData().getCurrentTierPatched());
+                        rankingInTierTextView.setText(rank.getData().getRankingInTier() + "/100");
 
-                String tier = response.body().getData().getCurrentTierPatched().toLowerCase();
-                tier = tier.replace(" ","");
+                        String tier = rank.getData().getCurrentTierPatched().toLowerCase();
+                        tier = tier.replace(" ","");
 
-                Log.d(TAG, "onResponse: " + tier);
+//                        Log.d(TAG, "onResponse: " + tier);
 
-                rankImageView.setImageResource(getResourceId(tier, "drawable", getActivity().getPackageName()));
-            }
+                        rankImageView.setImageResource(getResourceId(tier, "drawable", getActivity().getPackageName()));
+                    }
 
-            @Override
-            public void onFailure(Call<Rank> call, Throwable t) {
+                    @Override
+                    public void onError(Throwable e) {
+                        progressBar.setVisibility(GONE);
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
-                progressBar.setVisibility(GONE);
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onComplete() {
 
-            }
-        });
+                    }
+                });
 
         return view;
     }
