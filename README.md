@@ -11,3 +11,10 @@ Using the Riot's ingame API and unofficial API developed by [Henrik-3](https://g
 * [Picasso](http://square.github.io/picasso)
 * [GSON](https://github.com/google/gson)
 * [SQLite DB](https://developer.android.com/training/data-storage/sqlite)
+
+## Screenshots of app
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/home.jpeg" width="225" height="487" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/history.jpeg" width="225" height="487" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/leaderboard.jpeg" width="225" height="487" />
+
+<img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/overview.jpeg" width="225" height="487" /> &nbsp; <img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/career.jpeg" width="225" height="487" />&nbsp; <img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/matchDialog.jpeg" width="225" height="487" /> &nbsp;<img src="https://github.com/raj-gondalia/ValorantTracker/blob/master/rank.jpeg" width="225" height="487" />
+
+ 
